@@ -6,14 +6,14 @@
   "author": "serverless.com",
   "license": "MIT",
   "repository": {
-    "git": "https://github.com/serverless/serverless-google-cloudfunctions"
+    "git": "https://github.com/saiaman/serverless-google-cloudfunctions"
   },
   "scripts": {
     "test": "jest",
     "coverage": "jest --coverage",
     "lint": "eslint . --cache"
   },
-  "homepage": "https://github.com/serverless/serverless-google-cloudfunctions",
+  "homepage": "https://github.com/saiaman/serverless-google-cloudfunctions",
   "keywords": [
     "serverless",
     "serverless framework",
