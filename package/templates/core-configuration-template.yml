@@ -1,6 +1,5 @@
 resources:
-- type: storage.v1.bucket
-  name: will-be-replaced-by-serverless
-  properties:
-    storageClass: REGIONAL
-    location: will-be-replaced-by-serverless-region
+    - type: storage.v1.bucket
+      name: will-be-replaced-by-serverless
+      properties:
+          location: will-be-replaced-by-serverless-region
