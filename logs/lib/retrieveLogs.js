@@ -7,9 +7,7 @@ const chalk = require('chalk');
 
 module.exports = {
   retrieveLogs() {
-    return BbPromise.bind(this)
-      .then(this.getLogs)
-      .then(this.printLogs);
+    return BbPromise.bind(this).then(this.getLogs).then(this.printLogs);
   },
 
   getLogs() {
@@ -23,16 +21,15 @@ module.exports = {
     return this.provider.request('logging', 'entries', 'list', {
       filter: `Function execution ${func} ${region}`,
       orderBy: 'timestamp desc',
-      resourceNames: [
-        `projects/${project}`,
-      ],
+      resourceNames: [`projects/${project}`],
       pageSize,
     });
   },
 
   printLogs(logs) {
     if (!logs.entries || !logs.entries.length) {
-      logs = { //eslint-disable-line
+      logs = {
+        //eslint-disable-line
         entries: [
           {
             timestamp: new Date().toISOString().slice(0, 10),
@@ -42,8 +39,10 @@ module.exports = {
       };
     }
 
-    let output = logs.entries
-      .reduce((p, c, i) => p += `${chalk.grey(c.timestamp + ':')} ${c.textPayload}\n`, ''); //eslint-disable-line
+    let output = logs.entries.reduce(
+      (p, c) => (p += `${chalk.grey(`${c.timestamp}:`)} ${c.textPayload}\n`),
+      ''
+    ); //eslint-disable-line
 
     output = `Displaying the ${logs.entries.length} most recent log(s):\n\n${output}`; // prettify output
     output = output.slice(0, output.length - 1); // remove "\n---\n\n" for the last log entry

@@ -1,19 +1,73 @@
 {
-  "name": "serverless-google-cloudfunctions",
-  "version": "2.3.4",
+  "_from": "serverless-google-cloudfunctions@*",
+  "_id": "serverless-google-cloudfunctions@3.1.0",
+  "_inBundle": false,
+  "_integrity": "sha512-ME65vRrOeY3kncgy9ew1byZQqX0S1ghmvx98juUor7RTJAuffeIjyOUjCmOG01aEdMJq8+VEYd89WxlUF1WzZw==",
+  "_location": "/serverless-google-cloudfunctions",
+  "_phantomChildren": {
+    "@types/color-name": "1.1.1",
+    "google-auth-library": "6.0.2",
+    "googleapis-common": "4.4.0"
+  },
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "serverless-google-cloudfunctions@*",
+    "name": "serverless-google-cloudfunctions",
+    "escapedName": "serverless-google-cloudfunctions",
+    "rawSpec": "*",
+    "saveSpec": null,
+    "fetchSpec": "*"
+  },
+  "_requiredBy": [
+    "#DEV:/"
+  ],
+  "_resolved": "https://registry.npmjs.org/serverless-google-cloudfunctions/-/serverless-google-cloudfunctions-3.1.0.tgz",
+  "_shasum": "d6285ce174eec26ee65f26f52bd4c613a2b194ab",
+  "_spec": "serverless-google-cloudfunctions@*",
+  "_where": "/Users/ruialbuquerque/CITIO/CLIENTS/GALEC/WAD/MAIN-API/app-api",
+  "author": {
+    "name": "serverless.com"
+  },
+  "bugs": {
+    "url": "https://github.com/serverless/serverless-google-cloudfunctions/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "async": "^2.6.3",
+    "bluebird": "^3.7.2",
+    "chalk": "^3.0.0",
+    "fs-extra": "^8.1.0",
+    "googleapis": "^50.0.0",
+    "lodash": "^4.17.15"
+  },
+  "deprecated": false,
   "description": "Provider plugin for the Serverless Framework v1.x which adds support for Google Cloud Functions.",
-  "main": "index.js",
-  "author": "serverless.com",
-  "license": "MIT",
-  "repository": {
-    "git": "https://github.com/saiaman/serverless-google-cloudfunctions"
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@serverless/eslint-config": "^2.0.0",
+    "coveralls": "^3.1.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-import": "^2.20.2",
+    "git-list-updated": "^1.2.1",
+    "github-release-from-cc-changelog": "^2.2.0",
+    "husky": "^4.2.5",
+    "jest": "^25.5.4",
+    "lint-staged": "^10.2.2",
+    "prettier": "^2.0.5",
+    "sinon": "^8.1.1",
+    "standard-version": "^8.0.0"
   },
-  "scripts": {
-    "test": "jest",
-    "coverage": "jest --coverage",
-    "lint": "eslint . --cache"
+  "eslintConfig": {
+    "extends": "@serverless/eslint-config/node",
+    "root": true
   },
-  "homepage": "https://github.com/saiaman/serverless-google-cloudfunctions",
+  "homepage": "https://github.com/serverless/serverless-google-cloudfunctions",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "keywords": [
     "serverless",
     "serverless framework",
@@ -24,20 +78,38 @@
     "internet of things",
     "serverless.com"
   ],
-  "dependencies": {
-    "async": "^2.1.4",
-    "bluebird": "^3.4.7",
-    "chalk": "^1.1.3",
-    "fs-extra": "^3.0.1",
-    "googleapis": "^32.0.0",
-    "lodash": "^4.17.4"
+  "license": "MIT",
+  "lint-staged": {
+    "*.js": [
+      "eslint"
+    ],
+    "*.{css,html,js,json,md,yaml,yml}": [
+      "prettier -c"
+    ]
   },
-  "devDependencies": {
-    "coveralls": "^2.11.16",
-    "eslint": "^3.19.0",
-    "eslint-config-airbnb-base": "^11.2.0",
-    "eslint-plugin-import": "^2.2.0",
-    "jest": "^23.3.0",
-    "sinon": "^6.1.2"
-  }
+  "name": "serverless-google-cloudfunctions",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/serverless/serverless-google-cloudfunctions.git"
+  },
+  "scripts": {
+    "commitlint": "commitlint -f HEAD@{15}",
+    "commitlint:pull-request": "commitlint -f HEAD~1",
+    "coverage": "jest --coverage",
+    "lint": "eslint . --cache",
+    "lint:updated": "pipe-git-updated --ext=js -- eslint --cache",
+    "prepare-release": "standard-version && prettier --write CHANGELOG.md",
+    "prettier-check": "prettier -c --ignore-path .gitignore \"**/*.{css,html,js,json,md,yaml,yml}\"",
+    "prettier-check:updated": "pipe-git-updated --ext=css --ext=html --ext=js --ext=json --ext=md --ext=yaml --ext=yml -- prettier -c",
+    "prettify": "prettier --write --ignore-path .gitignore \"**/*.{css,html,js,json,md,yaml,yml}\"",
+    "prettify:updated": "pipe-git-updated --ext=css --ext=html --ext=js --ext=json --ext=md --ext=yaml --ext=yml -- prettier --write",
+    "test": "jest"
+  },
+  "standard-version": {
+    "skip": {
+      "commit": true,
+      "tag": true
+    }
+  },
+  "version": "3.1.0"
 }

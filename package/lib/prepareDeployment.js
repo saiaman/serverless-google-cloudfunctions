@@ -12,20 +12,16 @@ module.exports = {
     let deploymentTemplate = this.serverless.service.provider.compiledConfigurationTemplate;
 
     deploymentTemplate = this.serverless.utils.readFileSync(
-      path.join(
-        __dirname,
-        '..',
-        'templates',
-        'core-configuration-template.yml'));
+      path.join(__dirname, '..', 'templates', 'core-configuration-template.yml')
+    );
 
     const bucket = deploymentTemplate.resources.find(findDeploymentBucket);
 
     const name = this.serverless.service.provider.deploymentBucketName;
     const updatedBucket = updateBucketName(bucket, name);
-
     const bucketIndex = deploymentTemplate.resources.findIndex(findDeploymentBucket);
     if (this.serverless.service.provider.region) {
-      updatedBucket.properties.location = this.serverless.service.provider.region
+      updatedBucket.properties={location : this.serverless.service.provider.region}
     } else {
       unset(updatedBucket.properties)
     }
