@@ -24,7 +24,7 @@ module.exports = {
       validateHandlerProperty(funcObject, functionName);
       validateEventsProperty(funcObject, functionName);
       validateVpcConnectorProperty(funcObject, functionName);
-
+      validateIamProperty(funcObject, functionName);
       const funcTemplate = getFunctionTemplate(
         funcObject,
         projectName,
@@ -106,14 +106,37 @@ module.exports = {
         if (path) funcTemplate.properties.eventTrigger.path = path;
         funcTemplate.properties.eventTrigger.resource = resource;
       }
-
+      if (!funcTemplate.accessControl.gcpIamPolicy.bindings.length) {
+        delete funcTemplate.accessControl;
+      }
       this.serverless.service.provider.compiledConfigurationTemplate.resources.push(funcTemplate);
     });
 
     return BbPromise.resolve();
   },
 };
-
+const validateIamProperty = (funcObject, functionName) => {
+  if (_.get(funcObject, 'iam.bindings') && funcObject.iam.bindings.length > 0) {
+    funcObject.iam.bindings.forEach((binding) => {
+      if (!binding.role) {
+        const errorMessage = [
+          `The function "${functionName}" has no role specified for an IAM binding.`,
+          ' Each binding requires a role. For details on supported roles, see the documentation',
+          ' at: https://cloud.google.com/iam/docs/understanding-roles',
+        ].join('');
+        throw new Error(errorMessage);
+      }
+      if (!Array.isArray(binding.members) || !binding.members.length) {
+        const errorMessage = [
+          `The function "${functionName}" has no members specified for an IAM binding.`,
+          ' Each binding requires at least one member to be assigned. See the IAM documentation',
+          ' for details on configuring members: https://cloud.google.com/iam/docs/overview',
+        ].join('');
+        throw new Error(errorMessage);
+      }
+    });
+  }
+};
 const validateHandlerProperty = (funcObject, functionName) => {
   if (!funcObject.handler) {
     const errorMessage = [
