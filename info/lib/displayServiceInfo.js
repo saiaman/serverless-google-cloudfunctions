@@ -96,8 +96,10 @@ module.exports = {
 
 const getFunctionNameInService = (funcName, service, stage) => {
   let funcNameInService = funcName;
-  funcNameInService = funcNameInService.replace(service, '');
-  funcNameInService = funcNameInService.replace(stage, '');
-  funcNameInService = funcNameInService.slice(2, funcNameInService.length);
+  if( funcNameInService.indexOf(service)>0 && funcNameInService.indexOf(stage)>0 ){
+    funcNameInService = funcNameInService.replace(service, '');
+    funcNameInService = funcNameInService.replace(stage, '');
+    funcNameInService = funcNameInService.slice(2, funcNameInService.length);
+  }
   return funcNameInService;
 };
